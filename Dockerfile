@@ -1,15 +1,13 @@
 FROM node:18-alpine
-
+     
+# Add the following lines
+ENV CI=true
 ENV GENERATE_SOURCEMAP false
-WORKDIR /usr/app
-
-# install dependencies
-
-COPY ./package.json ./
+ENV WDS_SOCKET_PORT=0
+     
+WORKDIR /app
+COPY package.json ./
 RUN npm install
-
 COPY ./ ./
-
-# Default command
-# we list out all the commands that we want to run when the container is first created
-CMD [ "npm", "start" ]
+     
+CMD ["npm", "start"]
